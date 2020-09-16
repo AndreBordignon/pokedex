@@ -1,8 +1,10 @@
-import { fetchPokemonsList } from "../services/pokemons";
+import { fetchPokemonsList, searchPokemon } from "../services/pokemons";
 
 export const DATA_FETCHED = "DATA_FETCHED";
 export const DATA_FETCHING = "DATA_FETCHING";
 export const FETCH_MORE = "FECTH_MORE";
+export const DATA_SEARCH = "DATA_SEARCH";
+export const DESTROY_DATA = "DESTROY_DATA";
 
 export const fetchPokemons = (page, limit) => {
   return function (dispatch) {
@@ -32,6 +34,22 @@ export const fetchMorePokemons = (page, limit) => {
   };
 };
 
+export const findPokemon = (query) => {
+  return function (dispatch) {
+    dispatch(loading(true));
+    searchPokemon(query)
+      .then((res) => {
+        dispatch(pokeListFetch(res));
+        dispatch(loading(false));
+      })
+      .catch(() => {
+        dispatch(destroyData());
+
+        dispatch(loading(false));
+      });
+  };
+};
+
 const pokeListFetch = (data) => ({
   type: DATA_FETCHED,
   payload: data,
@@ -42,6 +60,14 @@ const fetchMore = (data) => ({
   payload: data,
 });
 
+export const search = (name) => ({
+  type: DATA_SEARCH,
+  payload: name,
+});
+
+export const destroyData = () => ({
+  type: DESTROY_DATA,
+});
 export const loading = (loader) => ({
   type: DATA_FETCHING,
   payload: loader,

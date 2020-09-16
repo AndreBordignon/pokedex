@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 import {
   PokemonCard,
@@ -13,18 +13,20 @@ import {
   CardBackground,
 } from "./styles";
 import BadgeIcon from "../../components/BadgeIcon";
+import { formatPokemonId } from "../../constants/functions";
 
-const PokeItem = ({ navigation, item, types, id, name, sprites }) => {
+export const PokeItem = memo(({ navigation, item }) => {
+  const { id, name, types } = item;
+
   return (
     <PokemonCard
+      key={name}
       type={types[0].type.name}
-      onPress={() =>
-        navigation.navigate("Details", { item, name, types, id, sprites })
-      }
+      onPress={() => navigation.navigate("Details", item)}
     >
       <CardBackground source={require("../../assets/img/background-card.png")}>
         <PokemonInfos>
-          <PokemonId>#{id}</PokemonId>
+          <PokemonId># {formatPokemonId(id)}</PokemonId>
           <Title>{name}</Title>
           <PokemonTypes>
             {types.map((item) => (
@@ -36,11 +38,16 @@ const PokeItem = ({ navigation, item, types, id, name, sprites }) => {
           </PokemonTypes>
         </PokemonInfos>
         <PokemonImageContainer>
-          <PokemonImage source={{ uri: sprites }} width="120" height="100" />
+          <PokemonImage
+            source={{
+              uri: `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${formatPokemonId(
+                id
+              )}.png`,
+            }}
+            resizeMode="contain"
+          />
         </PokemonImageContainer>
       </CardBackground>
     </PokemonCard>
   );
-};
-
-export default PokeItem;
+});

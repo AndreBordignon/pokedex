@@ -19,10 +19,12 @@ import {
   Value,
 } from "./styles";
 import BadgeIcon from "../../components/BadgeIcon";
+import { formatPokemonId } from "../../constants/functions";
 
 const PokemonDetail = ({ route }) => {
-  const { name, item, stats, abilities, types, id, sprites } = route.params,
+  const { name, stats, abilities, types, id, sprites } = route.params,
     mainType = types[0].type.name;
+
   return (
     <ScrollView type={mainType}>
       <PokeHeader>
@@ -30,7 +32,13 @@ const PokemonDetail = ({ route }) => {
           source={require("../../assets/img/patterns/details.png")}
           resizeMode="cover"
         >
-          <PokemonImage width="125" height="125" source={{ uri: sprites }} />
+          <PokemonImage
+            source={{
+              uri: `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${formatPokemonId(
+                id
+              )}.png`,
+            }}
+          />
           <BoxMainInfos>
             <Title>{name}</Title>
             <PokemonTypes>
@@ -46,7 +54,7 @@ const PokemonDetail = ({ route }) => {
       </PokeHeader>
       <MainStats>
         <StatsTitle type={mainType}>{name} Base stats</StatsTitle>
-        {item.stats.map((item) => {
+        {stats.map((item) => {
           return (
             <StatsBox key={item.stat.name}>
               <StatName>{item.stat.name}</StatName>

@@ -1,52 +1,62 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator } from "react-native";
 import { Container, LoadContainer, Loading } from "./styles";
-import PokeItem from "../../components/PokeItem";
+import { PokeItem } from "../../components/PokeItem";
+import SearchBar from "../../components/SearchBar";
 import { FlatList } from "react-native-gesture-handler";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchPokemons, fetchMorePokemons } from "../../redux/actions";
+import {
+  fetchPokemons,
+  fetchMorePokemons,
+  findPokemon,
+} from "../../redux/actions";
 
 const PokeFeed = ({ navigation }) => {
   const { navigate } = navigation;
   const [page, setPage] = useState(0);
-  let limit = 6;
+  const [searched, setSearched] = useState(false);
+  let limit = 12;
 
-  const { data, loading } = useSelector((state) => state);
+  const { data, loading, query } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchPokemons(page, limit));
   }, []);
 
+  useEffect(() => {
+    if (query) {
+      setPage(0);
+      setSearched(true);
+      dispatch(findPokemon(query));
+      return;
+    }
+    dispatch(fetchPokemons(page, limit));
+    setSearched(false);
+  }, [query]);
   return (
     <Container>
+      <SearchBar />
       <FlatList
         data={data}
         keyExtractor={(item) => String(item.id)}
         initialNumToRender={6}
         renderItem={({ item }) => (
-          <PokeItem
-            item={item}
-            name={item.name}
-            key={item.id}
-            id={item.id}
-            sprites={item.sprites.other.dream_world.front_default}
-            types={item.types}
-            navigation={navigation}
-            onPress={(item) => navigate("Details", item)}
-          />
+          <PokeItem navigation={navigation} item={item} />
         )}
         onEndReached={() => {
           !loading &&
+            !searched &&
             (setPage(page + limit),
             dispatch(fetchMorePokemons(page + limit, limit)));
         }}
         onEndReachedThreshold={0.5}
-        ListFooterComponent={() => (
-          <LoadContainer>
-            <Loading color="#FD7D24" />
-          </LoadContainer>
-        )}
+        ListFooterComponent={() =>
+          loading ? (
+            <LoadContainer>
+              <Loading color="#FD7D24" />
+            </LoadContainer>
+          ) : null
+        }
       />
     </Container>
   );

@@ -1,4 +1,10 @@
-import { DATA_FETCHED, DATA_FETCHING, FETCH_MORE } from "../actions";
+import {
+  DATA_FETCHED,
+  DATA_FETCHING,
+  FETCH_MORE,
+  DATA_SEARCH,
+  DESTROY_DATA,
+} from "../actions";
 
 const initialState = {
   data: [],
@@ -22,6 +28,16 @@ export default pokemonReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: action.payload,
+      };
+    case DATA_SEARCH:
+      return {
+        ...state,
+        query: action.payload,
+      };
+    case DESTROY_DATA:
+      return {
+        ...state,
+        data: [],
       };
     default:
       return state;

@@ -19,7 +19,9 @@ export const PokemonInfoContainer = styled.ImageBackground`
   justify-content: flex-start;
   flex-direction: row;
 `;
-export const PokemonImage = styled(SvgUri)`
+export const PokemonImage = styled.Image`
+  width: 135px;
+  height: 135px;
   margin: 10px;
 `;
 export const BoxMainInfos = styled.View`
