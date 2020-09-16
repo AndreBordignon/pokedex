@@ -24,6 +24,7 @@ scan the QR with the Expo app or use a emulator.
 ## Dependencies
 
 - [Expo](https://expo.io)
+- [Poke API](https://pokeapi.co/)
 - [Reactotron](https://github.com/infinitered/reactotron)
 - [React Redux](https://github.com/reduxjs/react-redux)
 - [Redux Thunk](https://github.com/reduxjs/redux-thunk)
