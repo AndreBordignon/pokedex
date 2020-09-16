@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { SafeAreaView } from "react-native";
 import { Container, LoadContainer, Loading } from "./styles";
 import { PokeItem } from "../../components/PokeItem";
 import SearchBar from "../../components/SearchBar";
@@ -34,31 +35,34 @@ const PokeFeed = ({ navigation }) => {
     setSearched(false);
   }, [query]);
   return (
-    <Container>
+    <SafeAreaView style={{ backgroundColor: "#fff" }}>
       <SearchBar />
-      <FlatList
-        data={data}
-        keyExtractor={(item) => String(item.id)}
-        initialNumToRender={6}
-        renderItem={({ item }) => (
-          <PokeItem navigation={navigation} item={item} />
-        )}
-        onEndReached={() => {
-          !loading &&
-            !searched &&
-            (setPage(page + limit),
-            dispatch(fetchMorePokemons(page + limit, limit)));
-        }}
-        onEndReachedThreshold={0.5}
-        ListFooterComponent={() =>
-          loading ? (
-            <LoadContainer>
-              <Loading color="#FD7D24" />
-            </LoadContainer>
-          ) : null
-        }
-      />
-    </Container>
+      <Container>
+        <FlatList
+          data={data}
+          keyExtractor={(item) => String(item.id)}
+          contentContainerStyle={{ marginTop: 10 }}
+          initialNumToRender={6}
+          renderItem={({ item }) => (
+            <PokeItem navigation={navigation} item={item} />
+          )}
+          onEndReached={() => {
+            !loading &&
+              !searched &&
+              (setPage(page + limit),
+              dispatch(fetchMorePokemons(page + limit, limit)));
+          }}
+          onEndReachedThreshold={0.5}
+          ListFooterComponent={() =>
+            loading ? (
+              <LoadContainer>
+                <Loading color="#FD7D24" />
+              </LoadContainer>
+            ) : null
+          }
+        />
+      </Container>
+    </SafeAreaView>
   );
 };
 

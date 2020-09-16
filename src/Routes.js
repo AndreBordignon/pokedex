@@ -8,15 +8,14 @@ const Stack = createStackNavigator();
 function Routes() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
         <Stack.Screen name="Home" component={PokeFeed} />
-        <Stack.Screen
-          name="Details"
-          options={{
-            headerShown: false,
-          }}
-          component={PokemonDetail}
-        />
+        <Stack.Screen name="Details" component={PokemonDetail} />
       </Stack.Navigator>
     </NavigationContainer>
   );
