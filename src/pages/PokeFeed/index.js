@@ -44,10 +44,9 @@ const PokeFeed = ({ navigation }) => {
         onEndReachedThreshold={0.5}
         ListFooterComponent={() => (
           <LoadContainer>
-            <Loading />
+            <Loading color="#FD7D24" />
           </LoadContainer>
         )}
-        refreshing={loading}
       />
     </Container>
   );

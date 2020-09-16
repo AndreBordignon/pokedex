@@ -9,6 +9,6 @@ export const LoadContainer = styled.View`
 `;
 
 export const Loading = styled.ActivityIndicator`
-  margin: 70px 0px;
+  margin: 15px 0px;
   align-self: center;
 `;

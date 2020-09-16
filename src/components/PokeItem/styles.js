@@ -8,7 +8,7 @@ export const PokemonCard = styled.TouchableOpacity`
   min-width: 330px;
   height: 130px;
   width: 95%;
-  margin: 15px auto;
+  margin: 15px auto 0px;
 `;
 export const PokemonInfos = styled.View`
   flex-direction: column;

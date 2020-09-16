@@ -69,6 +69,7 @@ export const StatsTitle = styled.Text`
   font-size: 16px;
   color: ${(props) => typeColors[props.type]};
   text-transform: capitalize;
+  margin: 0px 0px 20px;
 `;
 export const StatsBox = styled.View`
   flex-direction: row;
@@ -89,7 +90,7 @@ export const ProgressBar = styled.View`
 export const Progress = styled.View`
   background: ${(props) => typeColors[props.type]};
   height: 4px;
-  width: ${(props) => (props.progress / 3) * 2}px;
+  width: ${(props) => (props.progress / 2) * 2}px;
   border-radius: 2px;
   border-color: ${(props) => pokemonColor[props.type]};
 `;
