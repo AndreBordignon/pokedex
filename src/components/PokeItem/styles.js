@@ -1,11 +1,12 @@
 import styled from "styled-components/native";
 import { pokemonColor, typeColors } from "../../constants/colors";
+import SvgUri from "react-native-svg-uri";
 
 export const PokemonCard = styled.TouchableOpacity`
   border-radius: 12px;
   background: ${(props) => pokemonColor[props.type]};
   min-width: 330px;
-  min-height: 130px;
+  height: 130px;
   width: 95%;
   margin: 15px auto;
 `;
@@ -26,23 +27,24 @@ export const TypeContainer = styled.View`
   justify-content: center;
 `;
 export const TypeTitle = styled.Text`
+  font-family: sf-pro-display-regular;
   color: #fff;
   font-size: 13px;
   margin: 0px 8px;
 `;
 export const PokemonId = styled.Text`
-  color: #000;
+  font-family: sf-pro-display-medium;
+  color: rgba(23, 23, 27, 0.6);
   font-size: 14px;
 `;
 export const Title = styled.Text`
+  font-family: sf-pro-display-bold;
   color: #fff;
   font-size: 26px;
   text-transform: capitalize;
 `;
-export const PokemonImage = styled.Image`
-  width: 80px;
-  height: 100px;
-`;
+export const PokemonImage = styled(SvgUri)``;
+
 export const PokemonImageContainer = styled.View`
   align-self: center;
   justify-content: flex-start;

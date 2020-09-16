@@ -14,9 +14,14 @@ import {
 } from "./styles";
 import BadgeIcon from "../../components/BadgeIcon";
 
-const PokeItem = ({ types, id, name, avatar }) => {
+const PokeItem = ({ navigation, item, types, id, name, sprites }) => {
   return (
-    <PokemonCard type={types[0].type.name}>
+    <PokemonCard
+      type={types[0].type.name}
+      onPress={() =>
+        navigation.navigate("Details", { item, name, types, id, sprites })
+      }
+    >
       <CardBackground source={require("../../assets/img/background-card.png")}>
         <PokemonInfos>
           <PokemonId>#{id}</PokemonId>
@@ -31,7 +36,7 @@ const PokeItem = ({ types, id, name, avatar }) => {
           </PokemonTypes>
         </PokemonInfos>
         <PokemonImageContainer>
-          <PokemonImage source={{ uri: avatar }} />
+          <PokemonImage source={{ uri: sprites }} width="120" height="100" />
         </PokemonImageContainer>
       </CardBackground>
     </PokemonCard>

@@ -6,5 +6,9 @@ export const LoadContainer = styled.View`
   align-content: center;
   align-items: center;
   justify-content: center;
-  height: 100px;
+`;
+
+export const Loading = styled.ActivityIndicator`
+  margin: 70px 0px;
+  align-self: center;
 `;
