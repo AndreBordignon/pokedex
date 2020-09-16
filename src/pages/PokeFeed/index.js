@@ -36,12 +36,11 @@ const PokeFeed = ({ navigation }) => {
   }, [query]);
   return (
     <SafeAreaView style={{ backgroundColor: "#fff" }}>
-      <SearchBar />
       <Container>
+        <SearchBar />
         <FlatList
           data={data}
           keyExtractor={(item) => String(item.id)}
-          contentContainerStyle={{ marginTop: 10 }}
           initialNumToRender={6}
           renderItem={({ item }) => (
             <PokeItem navigation={navigation} item={item} />
@@ -54,11 +53,11 @@ const PokeFeed = ({ navigation }) => {
           }}
           onEndReachedThreshold={0.5}
           ListFooterComponent={() =>
-            loading ? (
+            loading && (
               <LoadContainer>
-                <Loading color="#FD7D24" />
+                <Loading color="#f66a70" />
               </LoadContainer>
-            ) : null
+            )
           }
         />
       </Container>
