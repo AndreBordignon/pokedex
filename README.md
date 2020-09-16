@@ -12,7 +12,7 @@ run `yarn` in your terminal to install all project dependencies
 
 now run `expo start` to init the project
 
-scan the QR with the Expo app or use and emulator.
+scan the QR with the Expo app or use a emulator.
 
 ## Technical Skills
 
