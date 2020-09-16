@@ -41,13 +41,12 @@ const PokeFeed = ({ navigation }) => {
             (setPage(page + limit),
             dispatch(fetchMorePokemons(page + limit, limit)));
         }}
-        ListFooterComponent={
-          loading ? (
-            <LoadContainer>
-              <Loading />
-            </LoadContainer>
-          ) : null
-        }
+        onEndReachedThreshold={0.5}
+        ListFooterComponent={() => (
+          <LoadContainer>
+            <Loading />
+          </LoadContainer>
+        )}
         refreshing={loading}
       />
     </Container>
